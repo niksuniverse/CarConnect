@@ -24,11 +24,11 @@ def main():
     width = 170  # Adjust based on your terminal size
 
     while True:
-        print("\n" + "=" * width)
+        print( "=" * width)
         print("🚗🔧  Welcome to CarConnect - Main Menu  🔧🚗".center(width))
         print("=" * width)
 
-        print("👥 Customer Management".center(width))
+        print("👥 Customer".center(width))
         print("👤 [1] Register New Customer".center(width))
         print("🔍 [2] View Customer by ID".center(width))
         print("🔑 [3] View Customer by Username".center(width))
@@ -37,7 +37,7 @@ def main():
 
         print("─" * width)
 
-        print("🚘 Vehicle Management".center(width))
+        print("🚘 Vehicle".center(width))
         print("🚘 [6] Add a New Vehicle to Fleet".center(width))
         print("📋 [7] List All Available Vehicles".center(width))
         print("🔍 [8] View Vehicle Details by ID".center(width))
@@ -46,7 +46,7 @@ def main():
 
         print("─" * width)
 
-        print("📅 Reservation Management".center(width))
+        print("📅 Reservation".center(width))
         print("📝 [11] Create a New Reservation".center(width))
         print("🔍 [12] View Reservation by ID".center(width))
         print("📚 [13] View Reservations by Customer ID".center(width))
@@ -78,15 +78,31 @@ def main():
             customer_service.register_customer(cust)
             print("✅ Customer registered successfully.")
 
+
         elif choice == '2':
-            cid = int(input("Enter Customer ID: "))
-            cust = customer_service.get_customer_by_id(cid)
-            print(vars(cust) if cust else "❌ Customer not found.")
+            try:
+                cid = int(input("Enter Customer ID: "))
+                cust = customer_service.get_customer_by_id(cid)
+                if cust:
+                    print("✅ Customer Details:")
+                    for key, value in vars(cust).items():
+                        print(f"{key.capitalize()}: {value}")
+                else:
+                    print("❌ Customer not found.")
+            except ValueError:
+                print("⚠️ Please enter a valid numeric Customer ID.")
 
         elif choice == '3':
             uname = input("Enter Username: ")
             cust = customer_service.get_customer_by_username(uname)
-            print(vars(cust) if cust else "❌ Customer not found.")
+            if cust:
+                print("✅ Customer Details:")
+                for key, value in vars(cust).items():
+                    print(f"{key.capitalize()}: {value}")
+            else:
+                print("❌ Customer not found.")
+
+
         elif choice == '4':
             cid = int(input("Customer ID to update: "))
             existing_cust = customer_service.get_customer_by_id(cid)
@@ -127,13 +143,32 @@ def main():
 
         elif choice == '7':
             vehicles = vehicle_service.get_available_vehicles()
-            for v in vehicles:
-                print(vars(v))
+            for i, v in enumerate(vehicles, 1):
+                print(f"\n🚗 Vehicle {i}:")
+                details = vars(v)
+                max_len = max(len(k) for k in details)
+                for key, value in details.items():
+                    print(f"{key.capitalize():<{max_len}} : {value}")
+        #
+        # elif choice == '7':
+        #     vehicles = vehicle_service.get_available_vehicles()
+        #     for v in vehicles:
+        #         print(vars(v))
+        #
 
         elif choice == '8':
-            vid = int(input("Enter Vehicle ID: "))
-            v = vehicle_service.get_vehicle_by_id(vid)
-            print(vars(v) if v else "❌ Vehicle not found.")
+            try:
+                vid = int(input("Enter Vehicle ID: "))
+                v = vehicle_service.get_vehicle_by_id(vid)
+                if v:
+                    print("✅ Vehicle Details:")
+                    for key, value in vars(v).items():
+                        print(f"{key.capitalize()}: {value}")
+                else:
+                    print("❌ Vehicle not found.")
+            except ValueError:
+                print("⚠️ ERROR !! Please enter a valid numeric Vehicle ID.")
+
 
         elif choice == '9':
             vid = int(input("Vehicle ID to update: "))
@@ -166,9 +201,18 @@ def main():
             print("📝 Reservation created.")
 
         elif choice == '12':
-            rid = int(input("Enter Reservation ID: "))
-            res = reservation_service.get_reservation_by_id(rid)
-            print(vars(res) if res else "❌ Reservation not found.")
+            try:
+                rid = int(input("Enter Reservation ID: "))
+                res = reservation_service.get_reservation_by_id(rid)
+                if res:
+                    print("✅ Reservation Details:")
+                    for key, value in vars(res).items():
+                        print(f"{key.capitalize()}: {value}")
+                else:
+                    print("❌ Reservation not found.")
+            except ValueError:
+                print("⚠️ ERROR !! Please enter a valid numeric Reservation ID.")
+
 
         elif choice == '13':
             cid = int(input("Enter Customer ID: "))
@@ -211,8 +255,10 @@ def main():
             print("✅ Admin registered successfully.")
 
         elif choice == '17':
-            print("👋 Exiting CarConnect. Goodbye!")
+
+            print("💻 System exit initialized...\n🔒 Session closed.\n🚗 CarConnect out. Bye-bye!")
             break
+
 
         else:
             print("⚠️ Invalid choice. Please try again.")

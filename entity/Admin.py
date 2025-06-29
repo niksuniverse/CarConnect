@@ -1,15 +1,15 @@
 class Admin:
     def __init__(self, admin_id, first_name, last_name, email, phone_number,
                  username, password, role, join_date):
-        self.__admin_id = admin_id
-        self.__first_name = first_name
-        self.__last_name = last_name
-        self.__email = email
-        self.__phone_number = phone_number
-        self.__username = username
-        self.__password = password
-        self.__role = role
-        self.__join_date = join_date
+        self.admin_id = admin_id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.phone_number = phone_number
+        self.username = username
+        self.password = password
+        self.role = role
+        self.join_date = join_date
 
     def authenticate(self, password):
         return self.__password == password
