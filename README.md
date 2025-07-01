@@ -1,129 +1,153 @@
-# 🚗 CarConnect - Car Rental Platform
+# 📄 `mainmodule.py` - Application Entry Point for CarConnect
 
-Welcome to **CarConnect**, a comprehensive car rental platform built using **Python** and **MySQL**. The application supports customer and admin functionalities, including secure login, vehicle management, reservation processing, and rich reporting features. It is structured following clean architecture principles with separation of concerns through packages like `entity`, `dao`, `util`, `exception`, and `main`.
+This file serves as the **core menu-driven entry point** of the CarConnect car rental system. It handles **user interaction**, invokes services, and navigates between customer/admin functionalities.
 
 ---
 
-## 📁 Project Structure
-'''
+## 🔧 What This File Does
+
+- Provides a **command-line interface** for customers and admins.
+- Collects and validates **user input**.
+- Routes requests to services in the `dao/` layer.
+- Manages menu navigation, login, registration, and CRUD operations.
+- Displays outputs like vehicle listings, customer profiles, and reports.
+
+---
+
+## 🧑‍💻 Roles and Functionalities
+
+### 👤 Customer
+
+#### 1. Register
+- Enters first name, last name, email, phone number, address, username, and password.
+- All fields go through **validation** (`validation.py`) such as:
+  - Valid name (alphabets only)
+  - Valid email format
+  - Phone number length (10 digits)
+  - Strong password (with special characters)
+  - Unique username
+
+#### 2. Login
+- Enters username and password.
+- Verified via `CustomerService.authenticate()`.
+
+#### 3. Customer Menu Options
+
+Once logged in:
+- `View My Details`: Displays all profile info pulled from the DB.
+- `Update My Details`: Editable fields with inline validation.
+- `Manage My Vehicles`:
+  - View all available vehicles.
+  - Search vehicles by make/model.
+  - View full vehicle info by ID.
+- `Manage My Reservations`:
+  - Create a reservation (Vehicle ID, From/To Date, Status).
+  - View all reservations.
+  - Update reservation details.
+  - Cancel reservation.
+
+---
+
+### 👨‍💼 Admin
+
+#### 1. Register Admin (via main menu)
+- Only accessible through menu option `[2] Create Admin`.
+- Similar validation and input as customer.
+
+#### 2. Login as Admin
+- Verified via `AdminService.authenticate()`.
+
+#### 3. Admin Control Panel
+
+Options include:
+- `Manage Admins`: Add, view by ID or username, delete.
+- `Manage Customers`: View all, view by ID, update, or delete.
+- `Manage Vehicles`: Add, view, update, delete.
+- `Manage Reservations`: Create, view by ID or customer, update, cancel.
+- `View Reports`:
+  - Top Vehicles by Revenue
+  - Most Active Customers
+  - Least Utilized Vehicles
+  - Monthly Revenue Trend
+  - Status Summary of Reservations
+  - Booking Trends by Day of Week
+  - Inactive Customers (no booking in 6+ months)
+  - Full Reservation History
+  - Vehicle Utilization %
+
+---
+
+## ✅ Input Validations Used (from `validation.py`)
+
+| Field | Validation |
+|-------|------------|
+| First/Last Name | Only alphabets |
+| Email | Regex pattern |
+| Phone | 10-digit number |
+| Username | No special characters, unique |
+| Password | Minimum length + special characters |
+
+---
+
+## 📦 External Modules Used
+
+- `datetime` – for handling registration/join/reservation dates.
+- `sys.path` – to import services from other folders like `dao`, `entity`, `util`.
+- `os` – for dynamic file path access to `db.properties`.
+
+---
+
+## 🔄 Application Flow Summary
+
+```text
+mainmodule.py
+↓
+Main Menu
+│
+├── [1] Create Customer → Customer object created → DB insert via CustomerService
+├── [2] Create Admin → Admin object created → DB insert via AdminService
+├── [3] Login as Customer
+│     └── On success → Customer Menu → vehicle/reservation features
+├── [4] Login as Admin
+│     └── On success → Admin Control Panel → manage all resources
+└── [5] Exit Application
+
+
+```text
 CarConnect/
 ├── dao/
-│ ├── CustomerService.py
-│ ├── ICustomerService.py
-│ ├── VehicleService.py
-│ ├── IVehicleService.py
-│ ├── ReservationService.py
-│ ├── IReservationService.py
-│ ├── AdminService.py
-│ ├── IAdminService.py
+│   ├── CustomerService.py
+│   ├── ICustomerService.py
+│   ├── VehicleService.py
+│   ├── IVehicleService.py
+│   ├── ReservationService.py
+│   ├── IReservationService.py
+│   ├── AdminService.py
+│   ├── IAdminService.py
 │
 ├── entity/
-│ ├── Customer.py
-│ ├── Vehicle.py
-│ ├── Reservation.py
-│ ├── Admin.py
+│   ├── Customer.py
+│   ├── Vehicle.py
+│   ├── Reservation.py
+│   ├── Admin.py
 │
 ├── util/
-│ ├── DBConnUtil.py
-│ ├── DBPropertyUtil.py
-│ ├── validation.py
+│   ├── DBConnUtil.py
+│   ├── DBPropertyUtil.py
+│   ├── validation.py
 │
 ├── exception/
-│ ├── AuthenticationException.py
-│ ├── ReservationException.py
-│ ├── VehicleNotFoundException.py
-│ ├── AdminNotFoundException.py
-│ ├── InvalidInputException.py
-│ ├── DatabaseConnectionException.py
+│   ├── AuthenticationException.py
+│   ├── ReservationException.py
+│   ├── VehicleNotFoundException.py
+│   ├── AdminNotFoundException.py
+│   ├── InvalidInputException.py
+│   ├── DatabaseConnectionException.py
 │
 ├── main/
-│ ├── mainmodule.py
+│   ├── mainmodule.py
 │
 ├── db.properties
 └── README.md
-'''
 
----
-
-## ⚙️ Technologies Used
-
-- **Language:** Python 3
-- **Database:** MySQL Workbench
-- **Testing:** `unittest`
-- **IDE:** PyCharm/VS Code
-- **Package Management:** Virtual Environment (`.venv`)
-
----
-
-## 📌 Key Features
-
-### 🔐 User Authentication
-- Separate login for **Customers** and **Admins**
-- Validation and exception handling for credentials
-
-### 🚘 Vehicle Management
-- Add, update, view, and delete vehicles
-- Search vehicles by make/model
-- Filter available vehicles
-
-### 📅 Reservation System
-- Real-time reservation creation and cancellation
-- Conflict detection and cost calculation
-- Tracks status: `pending`, `confirmed`, `completed`, `cancelled`
-
-### 🧑‍💼 Admin Control Panel
-- Admin can manage other admins, customers, vehicles, and reservations
-- Supports CRUD operations on all entities
-
-### 📊 Reports & Analytics
-- Top revenue-generating vehicles
-- Most active customers
-- Least utilized vehicles
-- Monthly revenue trends
-- Booking trends by weekday
-- Inactive customers
-- Reservation status summary
-- Full reservation history
-
----
-
-## 🧱 Database Schema
-
-1. **Customer Table**
-   - `CustomerID`, `FirstName`, `LastName`, `Email`, `PhoneNumber`, `Address`, `Username`, `Password`, `RegistrationDate`
-
-2. **Vehicle Table**
-   - `VehicleID`, `Model`, `Make`, `Year`, `Color`, `RegistrationNumber`, `Availability`, `DailyRate`
-
-3. **Reservation Table**
-   - `ReservationID`, `CustomerID`, `VehicleID`, `StartDate`, `EndDate`, `TotalCost`, `Status`
-
-4. **Admin Table**
-   - `AdminID`, `FirstName`, `LastName`, `Email`, `PhoneNumber`, `Username`, `Password`, `Role`, `JoinDate`
-
----
-
-## 🚧 Exception Handling
-
-Defined custom exceptions to ensure robust error reporting:
-
-- `AuthenticationException`
-- `ReservationException`
-- `VehicleNotFoundException`
-- `AdminNotFoundException`
-- `InvalidInputException`
-- `DatabaseConnectionException`
-
----
-
-## 🧪 Unit Testing
-
-Implemented unit tests for all major functionalities using `unittest`.
-
-**Example test cases:**
-- Invalid customer/admin login
-- Adding and updating vehicles
-- Fetching available vehicles
-- Creating and canceling reservations
-
----
+```
