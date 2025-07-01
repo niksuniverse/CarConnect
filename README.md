@@ -1,3 +1,19 @@
+# 🚗 CarConnect Application
+
+**CarConnect** is a Python-based Car Rental Management System designed to simplify and digitalize the entire car rental process for both customers and administrators. This project simulates a real-world rental platform, integrating user-friendly menus, secure authentication, vehicle and reservation handling, and performance analytics, all backed by a MySQL relational database.
+
+This system allows:
+- **Customers** to register, search available vehicles, book or cancel reservations, and manage their profile.
+- **Admins** to control every module: customer accounts, vehicles, reservations, and detailed reporting for business insights.
+
+The system is developed using modular architecture with clear separation of concerns via packages:
+- `entity/` for models  
+- `dao/` for database services  
+- `util/` for helper utilities  
+- `exception/` for custom errors  
+- `main/` for UI flow and entry point
+
+---
 # 📄 `mainmodule.py` - Application Entry Point for CarConnect
 
 This file serves as the **core menu-driven entry point** of the CarConnect car rental system. It handles **user interaction**, invokes services, and navigates between customer/admin functionalities.
@@ -100,18 +116,6 @@ Options include:
 ## 🔄 Application Flow Summary
 
 ```text
-mainmodule.py
-↓
-Main Menu
-│
-├── [1] Create Customer → Customer object created → DB insert via CustomerService
-├── [2] Create Admin → Admin object created → DB insert via AdminService
-├── [3] Login as Customer
-│     └── On success → Customer Menu → vehicle/reservation features
-├── [4] Login as Admin
-│     └── On success → Admin Control Panel → manage all resources
-└── [5] Exit Application
-
 
 ```text
 CarConnect/
