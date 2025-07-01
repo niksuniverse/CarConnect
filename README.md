@@ -177,7 +177,7 @@ CarConnect/
 
 ## 🙌 Acknowledgements
 
-This project was completed as part of the **Enterprise MySQL Developer** training at **Hexavarsity** by **Hexaware Technologies**.  
+This project was completed as part of the **Python foundational training** training at **Hexavarsity** by **Hexaware Technologies**.  
 Special thanks to our mentor **Mr. Munna Pandey** and all reviewers for their guidance and support throughout the project journey.
 
 ---
