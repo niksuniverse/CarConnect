@@ -157,6 +157,14 @@ CarConnect/
 ├── main/
 │   ├── mainmodule.py
 │
+├── test/
+│   ├── test_add_vehicle.py
+│   ├── test_list_all_available_vehicles.py
+│   ├── test_update_Customer_info.py
+|
+├── DB/
+│   ├── Schema.sql
+|
 ├── db.properties
 └── README.md
 ```
