@@ -14,16 +14,17 @@ The system is developed using modular architecture with clear separation of conc
 - `main/` for UI flow and entry point
 
 ---
+
 # 📄 `mainmodule.py` - Application Entry Point for CarConnect
 
-This file serves as the **core menu-driven entry point** of the CarConnect car rental system. It handles **user interaction**, invokes services, and navigates between customer/admin functionalities.
+This file serves as the **core menu-driven entry point** of the CarConnect system. It handles user interaction, invokes services, and navigates between customer and admin functionalities.
 
 ---
 
 ## 🔧 What This File Does
 
 - Provides a **command-line interface** for customers and admins.
-- Collects and validates **user input**.
+- Collects and validates user input.
 - Routes requests to services in the `dao/` layer.
 - Manages menu navigation, login, registration, and CRUD operations.
 - Displays outputs like vehicle listings, customer profiles, and reports.
@@ -35,30 +36,27 @@ This file serves as the **core menu-driven entry point** of the CarConnect car r
 ### 👤 Customer
 
 #### 1. Register
-- Enters first name, last name, email, phone number, address, username, and password.
-- All fields go through **validation** (`validation.py`) such as:
-  - Valid name (alphabets only)
-  - Valid email format
-  - Phone number length (10 digits)
-  - Strong password (with special characters)
-  - Unique username
+- Inputs: First name, last name, email, phone number, address, username, and password.
+- Validated through `validation.py`:
+  - Names should contain only alphabets.
+  - Valid email format required.
+  - Phone number must be 10 digits.
+  - Password must include special characters.
+  - Username must be unique.
 
 #### 2. Login
-- Enters username and password.
-- Verified via `CustomerService.authenticate()`.
+- Authenticates credentials via `CustomerService.authenticate()`.
 
-#### 3. Customer Menu Options
-
-Once logged in:
-- `View My Details`: Displays all profile info pulled from the DB.
-- `Update My Details`: Editable fields with inline validation.
-- `Manage My Vehicles`:
+#### 3. After Login - Customer Menu
+- **View My Details**  
+- **Update My Details**
+- **Manage My Vehicles**
   - View all available vehicles.
-  - Search vehicles by make/model.
-  - View full vehicle info by ID.
-- `Manage My Reservations`:
-  - Create a reservation (Vehicle ID, From/To Date, Status).
-  - View all reservations.
+  - Search by make or model.
+  - View vehicle details by ID.
+- **Manage My Reservations**
+  - Create reservation.
+  - View existing reservations.
   - Update reservation details.
   - Cancel reservation.
 
@@ -66,64 +64,64 @@ Once logged in:
 
 ### 👨‍💼 Admin
 
-#### 1. Register Admin (via main menu)
-- Only accessible through menu option `[2] Create Admin`.
-- Similar validation and input as customer.
+#### 1. Register Admin
+- Similar to customer registration (via menu option).
 
-#### 2. Login as Admin
-- Verified via `AdminService.authenticate()`.
+#### 2. Login
+- Authenticates via `AdminService.authenticate()`.
 
-#### 3. Admin Control Panel
-
-Options include:
-- `Manage Admins`: Add, view by ID or username, delete.
-- `Manage Customers`: View all, view by ID, update, or delete.
-- `Manage Vehicles`: Add, view, update, delete.
-- `Manage Reservations`: Create, view by ID or customer, update, cancel.
-- `View Reports`:
-  - Top Vehicles by Revenue
+#### 3. Admin Dashboard
+- **Manage Admins**
+  - Add, view, delete admins.
+- **Manage Customers**
+  - View, update, delete customers.
+- **Manage Vehicles**
+  - Add, view, update, delete vehicles.
+- **Manage Reservations**
+  - Create, view by ID/customer, update, cancel.
+- **Reports**
+  - Top Revenue Vehicles
   - Most Active Customers
   - Least Utilized Vehicles
   - Monthly Revenue Trend
-  - Status Summary of Reservations
-  - Booking Trends by Day of Week
-  - Inactive Customers (no booking in 6+ months)
-  - Full Reservation History
+  - Status Summary
+  - Booking Trends by Day
+  - Inactive Customers
+  - Reservation History
   - Vehicle Utilization %
 
 ---
 
-## ✅ Input Validations Used (from `validation.py`)
+## ✅ Input Validations Used (via `validation.py`)
 
-| Field | Validation |
-|-------|------------|
-| First/Last Name | Only alphabets |
-| Email | Regex pattern |
-| Phone | 10-digit number |
-| Username | No special characters, unique |
-| Password | Minimum length + special characters |
+| Field           | Validation                            |
+|----------------|----------------------------------------|
+| First/Last Name| Only alphabets                         |
+| Email          | Valid regex format                     |
+| Phone Number   | Must be 10 digits                      |
+| Username       | Unique, no special characters          |
+| Password       | Minimum length + special characters    |
 
 ---
 
 ## 📦 External Modules Used
 
-- `datetime` – for handling registration/join/reservation dates.
-- `sys.path` – to import services from other folders like `dao`, `entity`, `util`.
-- `os` – for dynamic file path access to `db.properties`.
+- `datetime` – for handling dates (reservations, registration, etc.)
+- `sys.path` – to import services and utility modules
+- `os` – to manage file paths and connect to `db.properties`
 
-  ## 🧱 Database Tables and Details
+---
+
+## 🧱 Database Tables and Details
 
 **1. Customer Table:** CustomerID (PK), FirstName, LastName, Email, PhoneNumber, Address, Username, Password, RegistrationDate  
 **2. Admin Table:** AdminID (PK), FirstName, LastName, Email, PhoneNumber, Username, Password, Role, JoinDate  
 **3. Vehicle Table:** VehicleID (PK), Model, Make, Year, Color, RegistrationNumber, Availability, DailyRate  
 **4. Reservation Table:** ReservationID (PK), CustomerID (FK), VehicleID (FK), StartDate, EndDate, TotalCost, Status
 
-
 ---
 
 ## 🔄 Application Flow Summary
-
-```text
 
 ```text
 CarConnect/
@@ -161,13 +159,35 @@ CarConnect/
 │
 ├── db.properties
 └── README.md
-
 ```
+
+---
+
+## 🛠️ Technologies Used
+
+- **Language:** Python 3  
+- **Database:** MySQL Workbench  
+- **IDE:** PyCharm  
+- **Version Control:** Git & GitHub  
+- **Architecture:** Modular (DAO, Entity, Exception, Util, Main)  
+- **Database Connector:** MySQL Connector for Python  
+- **Testing:** unittest
+
+---
+
+## 🙌 Acknowledgements
+
+This project was completed as part of the **Enterprise MySQL Developer** training at **Hexavarsity** by **Hexaware Technologies**.  
+Special thanks to our mentor **Mr. Munna Pandey** and all reviewers for their guidance and support throughout the project journey.
+
+---
 
 ## 👩‍💻 Author
 
 **Nikitha Y S**  
-B.Tech Artificial Intelligence and Data Science  
+🎓 B.Tech Artificial Intelligence and Data Science  
+💼 Graduate Engineer Trainee @ Hexaware Technologies  
+
 📧 Email: [nikithays06@gmail.com](mailto:nikithays06@gmail.com)  
 🔗 LinkedIn: [linkedin.com/in/nikithays](https://www.linkedin.com/in/nikitha-y-s-6b129223a/)  
 💻 GitHub: [github.com/niksuniverse](https://github.com/niksuniverse)
