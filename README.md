@@ -111,6 +111,14 @@ Options include:
 - `sys.path` – to import services from other folders like `dao`, `entity`, `util`.
 - `os` – for dynamic file path access to `db.properties`.
 
+  ## 🧱 Database Tables and Details
+
+**1. Customer Table:** CustomerID (PK), FirstName, LastName, Email, PhoneNumber, Address, Username, Password, RegistrationDate  
+**2. Admin Table:** AdminID (PK), FirstName, LastName, Email, PhoneNumber, Username, Password, Role, JoinDate  
+**3. Vehicle Table:** VehicleID (PK), Model, Make, Year, Color, RegistrationNumber, Availability, DailyRate  
+**4. Reservation Table:** ReservationID (PK), CustomerID (FK), VehicleID (FK), StartDate, EndDate, TotalCost, Status
+
+
 ---
 
 ## 🔄 Application Flow Summary
@@ -155,3 +163,11 @@ CarConnect/
 └── README.md
 
 ```
+
+## 👩‍💻 Author
+
+**Nikitha Y S**  
+B.Tech Artificial Intelligence and Data Science  
+📧 Email: [nikithays06@gmail.com](mailto:nikithays06@gmail.com)  
+🔗 LinkedIn: [linkedin.com/in/nikithays](https://www.linkedin.com/in/nikitha-y-s-6b129223a/)  
+💻 GitHub: [github.com/niksuniverse](https://github.com/niksuniverse)
