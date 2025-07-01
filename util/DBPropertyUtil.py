@@ -2,7 +2,7 @@
 import os
 
 def get_db_config(file_name):
-    base_dir = os.path.dirname(os.path.abspath(__file__))  # current script's dir
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, file_name)
     config = {}
     with open(file_path, 'r') as f:

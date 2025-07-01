@@ -27,11 +27,17 @@ class VehicleService(IVehicleService):
         conn = get_connection(self.config)
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO Vehicle (VehicleID, Model, Make, Year, Color, RegistrationNumber, Availability, DailyRate)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-        """, (vehicle.vehicle_id, vehicle.model, vehicle.make, vehicle.year, vehicle.color,
+            INSERT INTO Vehicle (Model, Make, Year, Color, RegistrationNumber, Availability, DailyRate)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, (vehicle.model, vehicle.make, vehicle.year, vehicle.color,
               vehicle.registration_number, vehicle.availability, vehicle.daily_rate))
+
         conn.commit()
+
+        # Get the auto-generated VehicleID from the database
+        vehicle.vehicle_id = cursor.lastrowid
+
+        cursor.close()
         conn.close()
 
     def update_vehicle(self, vehicle):

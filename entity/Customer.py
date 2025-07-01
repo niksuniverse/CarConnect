@@ -1,6 +1,7 @@
+
 class Customer:
-    def __init__(self, customer_id,first_name, last_name, email, phone_number,
-                 address, username, password, registration_date):
+    def __init__(self, customer_id, first_name, last_name, email, phone_number, address, username, password,
+                     registration_date):
         self.customer_id = customer_id
         self.first_name = first_name
         self.last_name = last_name
@@ -12,32 +13,76 @@ class Customer:
         self.registration_date = registration_date
 
     def authenticate(self, password):
-        return self.__password == password
+        return self._password == password
 
-    #Getters and Setters
-    def get_customer_id(self): return self.__customer_id
-    def set_customer_id(self, customer_id): self.__customer_id = customer_id
+    # customer_id property
+    @property
+    def customer_id(self):
+        return self._customer_id
+    @customer_id.setter
+    def customer_id(self, value):
+        self._customer_id = value
 
-    def get_first_name(self): return self.__first_name
-    def set_first_name(self, first_name): self.__first_name = first_name
+    # first_name property
+    @property
+    def first_name(self):
+        return self._first_name
+    @first_name.setter
+    def first_name(self, value):
+        self._first_name = value
 
-    def get_last_name(self): return self.__last_name
-    def set_last_name(self, last_name): self.__last_name = last_name
+    # last_name property
+    @property
+    def last_name(self):
+        return self._last_name
+    @last_name.setter
+    def last_name(self, value):
+        self._last_name = value
 
-    def get_email(self): return self.__email
-    def set_email(self, email): self.__email = email
+    # email property
+    @property
+    def email(self):
+        return self._email
+    @email.setter
+    def email(self, value):
+        self._email = value
 
-    def get_phone_number(self): return self.__phone_number
-    def set_phone_number(self, phone): self.__phone_number = phone
+    # phone_number property
+    @property
+    def phone_number(self):
+        return self._phone_number
+    @phone_number.setter
+    def phone_number(self, value):
+        self._phone_number = value
 
-    def get_address(self): return self.__address
-    def set_address(self, address): self.__address = address
+    # address property
+    @property
+    def address(self):
+        return self._address
+    @address.setter
+    def address(self, value):
+        self._address = value
 
-    def get_username(self): return self.__username
-    def set_username(self, username): self.__username = username
+    # username property
+    @property
+    def username(self):
+        return self._username
+    @username.setter
+    def username(self, value):
+        self._username = value
 
-    def get_password(self): return self.__password
-    def set_password(self, password): self.__password = password
+    # password property
+    @property
+    def password(self):
+        return self._password
+    @password.setter
+    def password(self, value):
+        self._password = value
 
-    def get_registration_date(self): return self.__registration_date
-    def set_registration_date(self, date): self.__registration_date = date
+    # registration_date property
+    @property
+    def registration_date(self):
+        return self._registration_date
+    @registration_date.setter
+    def registration_date(self, value):
+        self._registration_date = value

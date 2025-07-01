@@ -1,6 +1,6 @@
 class Vehicle:
-    def __init__(self, vehicle_id, model, make, year, color,
-                 registration_number, availability, daily_rate):
+    def __init__(self, vehicle_id=None, model=None, make=None, year=None, color=None,
+                 registration_number=None, availability=None, daily_rate=None):
         self.vehicle_id = vehicle_id
         self.model = model
         self.make = make
@@ -9,6 +9,7 @@ class Vehicle:
         self.registration_number = registration_number
         self.availability = availability
         self.daily_rate = daily_rate
+
 
     # Getters and Setters
     def get_vehicle_id(self):

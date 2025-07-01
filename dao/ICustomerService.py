@@ -21,4 +21,10 @@ class ICustomerService(ABC):
     @abstractmethod
     def delete_customer(self, customer_id):
         pass
+    @abstractmethod
+    def authenticate(self, username, password):
+        pass
 
+    @abstractmethod
+    def list_all_customers(self):
+        pass

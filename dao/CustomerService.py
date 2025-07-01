@@ -8,6 +8,7 @@ from entity.Customer import Customer
 from exception.InvalidInputException import InvalidInputException
 from exception.DatabaseConnectionException import DatabaseConnectionException
 
+
 class CustomerService(ICustomerService):
 
     def __init__(self, config):
@@ -42,14 +43,19 @@ class CustomerService(ICustomerService):
             conn = get_connection(self.config)
             cursor = conn.cursor()
             cursor.execute("""
-                INSERT INTO Customer ( CustomerID, FirstName, LastName, Email, PhoneNumber, Address, Username, Password, RegistrationDate)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO Customer 
+                (FirstName, LastName, Email, PhoneNumber, Address, Username, Password, RegistrationDate)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """, (
-                 customer.customer_id, customer.first_name, customer.last_name, customer.email,
+                customer.first_name, customer.last_name, customer.email,
                 customer.phone_number, customer.address, customer.username,
                 customer.password, customer.registration_date
             ))
             conn.commit()
+
+            # Get the generated ID from MySQL
+            customer.customer_id = cursor.lastrowid
+
             cursor.close()
             conn.close()
         except Exception as e:
@@ -83,3 +89,28 @@ class CustomerService(ICustomerService):
             conn.close()
         except Exception as e:
             raise DatabaseConnectionException(f"Error deleting customer: {str(e)}")
+
+    def list_all_customers(self):
+        try:
+            conn = get_connection(self.config)
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM Customer")
+            rows = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            return [Customer(*row) for row in rows]
+        except Exception as e:
+            raise DatabaseConnectionException(f"Error fetching all customers: {str(e)}")
+
+    def authenticate(self, username, password):
+        try:
+            conn = get_connection(self.config)
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM Customer WHERE Username = %s AND Password = %s", (username, password))
+            row = cursor.fetchone()
+            cursor.close()
+            conn.close()
+            return Customer(*row) if row else None
+        except Exception as e:
+            raise DatabaseConnectionException(f"Error authenticating customer: {str(e)}")
+
