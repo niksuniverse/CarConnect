@@ -631,7 +631,44 @@ def main():
             print(f"✅ Customer created with ID: {cust.customer_id}")
 
         elif choice == '2':
-            admin_menu(admin_service, customer_service, vehicle_service, reservation_service)
+            while True:
+                fname = input("First Name: ")
+                if is_valid_name(fname): break
+                print("❌ Invalid first name.")
+
+            while True:
+                lname = input("Last Name: ")
+                if is_valid_name(lname): break
+                print("❌ Invalid last name.")
+
+            while True:
+                email = input("Email: ")
+                if is_valid_email(email): break
+                print("❌ Invalid email format.")
+
+            while True:
+                phone = input("Phone (10 digits): ")
+                if is_valid_phone(phone): break
+                print("❌ Invalid phone number.")
+
+            while True:
+                uname = input("Username: ")
+                if is_valid_username(uname): break
+                print("❌ Invalid username.")
+
+            while True:
+                pwd = input("Password: ")
+                if is_valid_password(pwd): break
+                print("❌ Password too weak.")
+
+            role = input("Role (e.g. Manager): ")
+            join_date = datetime.today().strftime('%Y-%m-%d')
+
+            admin = Admin(None, fname, lname, email, phone, uname, pwd, role, join_date)
+            admin_service.register_admin(admin)
+            print("✅ Admin registered.")
+            print(f"✅ Admin created with ID: {admin.admin_id}")
+            
 
         elif choice == '3':
 
@@ -642,7 +679,7 @@ def main():
 
         elif choice == '5':
             print("🚪 Exiting CarConnect Application")
-            print("Thanks for visiting !!")
+            print("Thanks for visiting , Come again  !!")
             break
 
         else:
