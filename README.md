@@ -21,15 +21,6 @@ This file serves as the **core menu-driven entry point** of the CarConnect syste
 
 ---
 
-##  What This File Does
-
-- Provides a **command-line interface** for customers and admins.
-- Collects and validates user input.
-- Routes requests to services in the `dao/` layer.
-- Manages menu navigation, login, registration, and CRUD operations.
-- Displays outputs like vehicle listings, customer profiles, and reports.
-
----
 
 ##  Roles and Functionalities
 
