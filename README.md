@@ -194,8 +194,6 @@ Special thanks to our mentor **Mr. Munna Pandey** and all reviewers for their gu
 
 **Nikitha Y S**  
 🎓 B.Tech Artificial Intelligence and Data Science  
-💼 Graduate Engineer Trainee @ Hexaware Technologies  
-
 📧 Email: [nikithays06@gmail.com](mailto:nikithays06@gmail.com)  
 🔗 LinkedIn: [linkedin.com/in/nikithays](https://www.linkedin.com/in/nikitha-y-s-6b129223a/)  
 💻 GitHub: [github.com/niksuniverse](https://github.com/niksuniverse)
