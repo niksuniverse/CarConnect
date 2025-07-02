@@ -15,13 +15,13 @@ The system is developed using modular architecture with clear separation of conc
 
 ---
 
-# 📄 `mainmodule.py` - Application Entry Point for CarConnect
+#  `mainmodule.py` - Application Entry Point for CarConnect
 
 This file serves as the **core menu-driven entry point** of the CarConnect system. It handles user interaction, invokes services, and navigates between customer and admin functionalities.
 
 ---
 
-## 🔧 What This File Does
+##  What This File Does
 
 - Provides a **command-line interface** for customers and admins.
 - Collects and validates user input.
@@ -31,9 +31,9 @@ This file serves as the **core menu-driven entry point** of the CarConnect syste
 
 ---
 
-## 🧑‍💻 Roles and Functionalities
+##  Roles and Functionalities
 
-### 👤 Customer
+### Customer
 
 #### 1. Register
 - Inputs: First name, last name, email, phone number, address, username, and password.
@@ -62,7 +62,7 @@ This file serves as the **core menu-driven entry point** of the CarConnect syste
 
 ---
 
-### 👨‍💼 Admin
+###  Admin
 
 #### 1. Register Admin
 - Similar to customer registration (via menu option).
@@ -92,7 +92,7 @@ This file serves as the **core menu-driven entry point** of the CarConnect syste
 
 ---
 
-## ✅ Input Validations Used (via `validation.py`)
+##  Input Validations Used (via `validation.py`)
 
 | Field           | Validation                            |
 |----------------|----------------------------------------|
@@ -104,7 +104,7 @@ This file serves as the **core menu-driven entry point** of the CarConnect syste
 
 ---
 
-## 📦 External Modules Used
+##  External Modules Used
 
 - `datetime` – for handling dates (reservations, registration, etc.)
 - `sys.path` – to import services and utility modules
@@ -112,7 +112,7 @@ This file serves as the **core menu-driven entry point** of the CarConnect syste
 
 ---
 
-## 🧱 Database Tables and Details
+##  Database Tables and Details
 
 **1. Customer Table:** CustomerID (PK), FirstName, LastName, Email, PhoneNumber, Address, Username, Password, RegistrationDate  
 **2. Admin Table:** AdminID (PK), FirstName, LastName, Email, PhoneNumber, Username, Password, Role, JoinDate  
@@ -121,7 +121,7 @@ This file serves as the **core menu-driven entry point** of the CarConnect syste
 
 ---
 
-## 🔄 Application Flow Summary
+##  Application Flow Summary
 
 ```text
 CarConnect/
@@ -171,7 +171,7 @@ CarConnect/
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - **Language:** Python 3  
 - **Database:** MySQL Workbench  
@@ -183,17 +183,17 @@ CarConnect/
 
 ---
 
-## 🙌 Acknowledgements
+##  Acknowledgements
 
 This project was completed as part of the **Python foundational training** training at **Hexavarsity** by **Hexaware Technologies**.  
 Special thanks to our mentor **Mr. Munna Pandey** and all reviewers for their guidance and support throughout the project journey.
 
 ---
 
-## 👩‍💻 Author
+##  Author
 
 **Nikitha Y S**  
-🎓 B.Tech Artificial Intelligence and Data Science  
-📧 Email: [nikithays06@gmail.com](mailto:nikithays06@gmail.com)  
-🔗 LinkedIn: [linkedin.com/in/nikithays](https://www.linkedin.com/in/nikitha-y-s-6b129223a/)  
-💻 GitHub: [github.com/niksuniverse](https://github.com/niksuniverse)
+ B.Tech Artificial Intelligence and Data Science  
+ Email: [nikithays06@gmail.com](mailto:nikithays06@gmail.com)  
+ LinkedIn: [linkedin.com/in/nikithays](https://www.linkedin.com/in/nikitha-y-s-6b129223a/)  
+ GitHub: [github.com/niksuniverse](https://github.com/niksuniverse)
