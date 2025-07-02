@@ -110,7 +110,23 @@ This file serves as the **core menu-driven entry point** of the CarConnect syste
 - `sys.path` – to import services and utility modules
 - `os` – to manage file paths and connect to `db.properties`
 
----
+
+##  Installation
+
+Install the required package using pip:
+
+```bash
+pip install mysql-connector-python
+
+```
+##  Running the Application
+
+To start the application, run the following command in your terminal from the project directory:
+```bash
+python main.py
+```
+This will launch the application. Make sure the main.py file is located inside the main package.
+
 
 ##  Database Tables and Details
 
